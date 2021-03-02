@@ -27,8 +27,8 @@ namespace DSharpPlus.Entities
         /// <param name="value">The value of the parameter choice.</param>
         public DiscordApplicationCommandOptionChoice(string name, object value)
         {
-            if (!(value is string || value is int))
-                throw new InvalidOperationException($"Only {typeof(string)} or {typeof(int)} types may be passed to a command option choice.");
+            if (!(value is string || value is long))
+                throw new InvalidOperationException($"Only {typeof(string)} or {typeof(long)} types may be passed to a command option choice.");
 
             this.Name = name;
             this.Value = value;
