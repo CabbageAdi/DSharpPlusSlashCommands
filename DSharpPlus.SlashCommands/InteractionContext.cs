@@ -64,7 +64,7 @@ namespace DSharpPlus.SlashCommands
         /// <param name="type">The type of the response</param>
         /// <param name="builder">The data to be sent, if any</param>
         /// <returns></returns>
-        public async Task RespondAsync(DiscordInteractionResponseType type, DiscordInteractionBuilder builder = null)
+        public async Task CreateResponseAsync(DiscordInteractionResponseType type, DiscordInteractionBuilder builder = null)
         {
             await ScommExtension.CreateInteractionResponseAsync(InteractionId, Token, type, builder);
         }
