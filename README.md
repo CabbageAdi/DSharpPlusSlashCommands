@@ -68,7 +68,7 @@ slash.RegisterCommands<SlashCommands>();
 
 Note: you can only register ONE class for a single guild, and only one class globally as well. Trying to register more than one will overwrite the previous. However, if you find some use for it, you can register a different class for different guilds.
 
-# Making Commands!
+## Making Commands!
 On to the exciting part. 
 
 Slash command methods must be `Task`s and have the `SlashCommand` attribute. The first argument for the method must be an `InteractionContext`. Let's make a simple slash command:
@@ -196,6 +196,9 @@ public class Group
   {
 }
 ```
+
+# Issues and contributing
+If you find any issues or bugs, you should join the discord server and discuss it. If it's an actual bug, you can create an [issue](https://github.com/IDoEverything/DSharpPlusSlashCommands/issues). If you would like to contribute or make changes, feel free to open a [pull request](https://github.com/IDoEverything/DSharpPlusSlashCommands/pulls).
 
 # Questions?
 Join my [discord server](https://discord.gg/2ZhXXVJYhU)!
