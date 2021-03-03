@@ -40,7 +40,7 @@ namespace DSharpPlus.SlashCommands
         /// <summary>
         /// Gets the slash command module this interaction was created in
         /// </summary>
-        public SlashCommandsExtension ScommExtension { get; internal set; }
+        public SlashCommandsExtension SlashCommandsExtension { get; internal set; }
 
         /// <summary>
         /// Gets the token for this interaction
@@ -66,7 +66,7 @@ namespace DSharpPlus.SlashCommands
         /// <returns></returns>
         public async Task CreateResponseAsync(DiscordInteractionResponseType type, DiscordInteractionBuilder builder = null)
         {
-            await ScommExtension.CreateInteractionResponseAsync(InteractionId, Token, type, builder);
+            await SlashCommandsExtension.CreateInteractionResponseAsync(InteractionId, Token, type, builder);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace DSharpPlus.SlashCommands
         /// <returns></returns>
         public async Task EditResponseAsync(DiscordInteractionBuilder builder)
         {
-            await ScommExtension.EditInteractionResponseAsync(Token, builder);
+            await SlashCommandsExtension.EditInteractionResponseAsync(Token, builder);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@ namespace DSharpPlus.SlashCommands
         /// <returns></returns>
         public async Task DeleteResponseAsync()
         {
-            await ScommExtension.DeleteInteractionResponseAsync(Token);
+            await SlashCommandsExtension.DeleteInteractionResponseAsync(Token);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace DSharpPlus.SlashCommands
         /// <returns>The created message</returns>
         public async Task<DiscordMessage> FollowUpAsync(DiscordWebhookBuilder webhook)
         {
-            return await ScommExtension.CreateFollowupMessageAsync(Token, webhook);
+            return await SlashCommandsExtension.CreateFollowupMessageAsync(Token, webhook);
         }
     }
 }

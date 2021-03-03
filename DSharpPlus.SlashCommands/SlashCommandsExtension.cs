@@ -329,7 +329,7 @@ namespace DSharpPlus.SlashCommands
                     Guild = e.Interaction.Guild,
                     Member = e.Interaction.Member,
                     Client = client,
-                    ScommExtension = this,
+                    SlashCommandsExtension = this,
                     CommandName = e.Interaction.Data.Name,
                     InteractionId = e.Interaction.Id,
                     Token = e.Interaction.Token
