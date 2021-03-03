@@ -139,11 +139,11 @@ Some examples:
             await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionBuilder().WithEmbed(embed.Build()));
         }
         
-        [SlashCommand("phrase", "Sends a certain phrase in the chat!"]
+        [SlashCommand("phrase", "Sends a certain phrase in the chat!")]
         public async Task Phrase(InteractionContext ctx,
           [Choice("phrase1", "all's well that ends well")]
-          [Choice("phrase2", "be happy!"]
-          [Option("phrase", "the phrase to respond with"] string phrase)
+          [Choice("phrase2", "be happy!")]
+          [Option("phrase", "the phrase to respond with")] string phrase)
         {
           await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionBuilder().WithContent(phrase));
         }
