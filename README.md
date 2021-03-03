@@ -70,7 +70,84 @@ Note: you can only register ONE class for a single guild, and only one class glo
 
 # Making Commands!
 On to the exciting part. 
-TODO
+
+Slash command methods must be `Task`s and have the `SlashCommand` attribute. The first argument for the method must be an `InteractionContext`. Let's make a simple slash command:
+```cs
+public class SlashCommands : SlashCommandModule
+{
+  [SlashCommand("test", "A slash command made to test the DSharpPlusSlashCommands library!")]
+  public async Task TestCommand(InteractionContext ctx)
+  {
+    Console.WriteLine($"The slash command test was executed by {ctx.Member.Username}!");
+  }
+}
+```
+If you've registered the command class for your testing server, once you start the bot, you should see the `/test` command pop up when you type `/` into the chat. When you execute it, you should get the message in your console!
+
+### Responding
+You probably want to do a lot more with the command than write a message to the console. Let's make a response to the command instead.
+
+To make a response, you must run `CreateResponseAsync` on your `InteractionContext`. `CreateResponseAsync` takes two arguments. The first is a `DiscordInteractionResponseType`. There are currently 3 types:
+* `Ping` - The docs don't specify where exactly you'll ever get a response of type `Pong`, so it's safe to ignore for now.
+* `DeferredChannelMessageWithSource` - Acknowledges the interaction, doesn't require any content.
+* `ChannelMessageWithSource` - Sends a message to the channel, requires you to specify some data to send.
+
+An interaction expires in 3 seconds unless you make a response. If the code you execute before making a response has the potential to take more than 3 seconds, you should first create a `DeferredChannelMessageWithSource` response, and then edit it after your code executes.
+
+IMPORTANT: In my haste to future-proof, I removed some reponse types that are supposed to be deprecated eventually, but haven't yet been. The announced update hasn't yet rolled out at the time of writing, so this doesn't encompass all the possibilites of responses, but keep in mind that they will eventually be removed, most likely in a few days at the time of writing, so it's only for some time. Because of this, you're actually forced to send at least some empty data with an acknowledge to be able to edit it, which will be the case until the update comes out.
+
+The second argument is a type of `DiscordInteractionBuilder`. It functions similarly to the `DiscordMessageBuilder`, except you cannot send files, and you can have multiple embeds.
+
+A simple response would be like:
+```cs
+[SlashCommand("test", "A slash command made to test the DSharpPlusSlashCommands library!")]
+public async Task TestCommand(InteractionContext ctx)
+{
+  await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionBuilder().WithContent("Success!"));
+}
+```
+If your code will take some time to execute:
+```cs
+[SlashCommand("test", "A slash command made to test the DSharpPlusSlashCommands library!")]
+public async Task TestCommand(InteractionContext ctx)
+{
+  await ctx.CreateResponseAsync(DiscordInteractionResponseType.DeferredChannelMessageWithSource, new DiscordInteractionBuilder());
+  await Task.Delay(5000);
+  await ctx.EditResponseAsync(new DiscordInteractionBuilder().WithContent("5 second delay complete!"));
+}
+```
+### Arguments
+If you want the user to be able to give more data to the command, you can add some arguments.
+
+Arguments must have the `Option` attribute, and can only be of type `string`, `long`, `bool`, `DiscordUser`, `DiscordChannel` and `DiscordRole`. If you want to make them optional, you can assign a default value as well.
+
+You can also predefine some choices for the option, with the `Choice` attribute. You can add multiple attributes to add multiple choices. Choices only work for `string` and `long` arguments.
+
+Some examples:
+```cs
+        [SlashCommand("avatar", "Get someone's avatar")]
+        public async Task Av(InteractionContext ctx, [Option("user", "The user to get it for")] DiscordUser user = null)
+        {
+            user ??= ctx.Member;
+            var embed = new DiscordEmbedBuilder
+            {
+                Title = $"Avatar",
+                ImageUrl = user.AvatarUrl
+            }.
+            WithFooter($"Requested by {ctx.Member.DisplayName}", ctx.Member.AvatarUrl).
+            WithAuthor($"{user.Username}", user.AvatarUrl, user.AvatarUrl);
+            await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionBuilder().WithEmbed(embed.Build()));
+        }
+        
+        [SlashCommand("phrase", "Sends a certain phrase in the chat!"]
+        public async Task Phrase(InteractionContext ctx,
+          [Choice("phrase1", "all's well that ends well")]
+          [Choice("phrase2", "be happy!"]
+          [Option("phrase", "the phrase to respond with"] string phrase)
+        {
+          await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionBuilder().WithContent(phrase));
+        }
+ ```
 
 # Questions?
 Join my [discord server](https://discord.gg/2ZhXXVJYhU)!
