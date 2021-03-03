@@ -148,6 +148,54 @@ Some examples:
           await ctx.CreateResponseAsync(DiscordInteractionResponseType.ChannelMessageWithSource, new DiscordInteractionBuilder().WithContent(phrase));
         }
  ```
+### Groups
+You can have slash commands in groups. Their structure is explained [here](https://discord.com/developers/docs/interactions/slash-commands#nested-subcommands-and-groups), I would highly recommend reading it to understand how they work. To register groups:
+```cs
+//For a group and subcommands inside the group
+[SlashCommandGroup("group", "description")]
+public class Group
+{
+  [SlashCommand("command", "description")
+  public async Task Command(InteractionContext ctx) {}
+  
+  [SlashCommand("command2", "description")
+  public async Task Command2(InteractionContext ctx) {}
+  
+  [SlashCommand("command3", "description")
+  public async Task Command3(InteractionContext ctx) {}
+}
+
+//For subgroups inside groups
+[SlashCommandGroup("group", "description")]
+public class Group
+{
+  [SlashCommandGroup("subgroup", "description")]
+  public class SubGroup
+  {
+    [SlashCommand("command", "description")
+    public async Task Command(InteractionContext ctx) {}
+  
+    [SlashCommand("command2", "description")
+    public async Task Command2(InteractionContext ctx) {}
+  
+    [SlashCommand("command3", "description")
+    public async Task Command3(InteractionContext ctx) {}
+  {
+  
+  [SlashCommandGroup("subgroup2", "description")]
+  public class SubGroup2
+  {
+    [SlashCommand("command", "description")
+    public async Task Command(InteractionContext ctx) {}
+  
+    [SlashCommand("command2", "description")
+    public async Task Command2(InteractionContext ctx) {}
+  
+    [SlashCommand("command3", "description")
+    public async Task Command3(InteractionContext ctx) {}
+  {
+}
+```
 
 # Questions?
 Join my [discord server](https://discord.gg/2ZhXXVJYhU)!
