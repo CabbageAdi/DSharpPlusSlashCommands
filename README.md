@@ -94,8 +94,6 @@ To make a response, you must run `CreateResponseAsync` on your `InteractionConte
 
 An interaction expires in 3 seconds unless you make a response. If the code you execute before making a response has the potential to take more than 3 seconds, you should first create a `DeferredChannelMessageWithSource` response, and then edit it after your code executes.
 
-IMPORTANT: In my haste to future-proof, I removed some reponse types that are supposed to be deprecated eventually, but haven't yet been. The announced update hasn't yet rolled out at the time of writing, so this doesn't encompass all the possibilites of responses, but keep in mind that they will eventually be removed, most likely in a few days at the time of writing, so it's only for some time. Because of this, you're actually forced to send at least some empty data with an acknowledge to be able to edit it, which will be the case until the update comes out.
-
 The second argument is a type of `DiscordInteractionBuilder`. It functions similarly to the `DiscordMessageBuilder`, except you cannot send files, and you can have multiple embeds.
 
 A simple response would be like:
