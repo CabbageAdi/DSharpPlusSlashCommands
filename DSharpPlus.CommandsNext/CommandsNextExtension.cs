@@ -24,7 +24,6 @@ namespace DSharpPlus.CommandsNext
     {
         private CommandsNextConfiguration Config { get; }
         private HelpFormatterFactory HelpFormatter { get; }
-
         private MethodInfo ConvertGeneric { get; }
         private Dictionary<Type, string> UserFriendlyTypeNames { get; }
         internal Dictionary<Type, IArgumentConverter> ArgumentConverters { get; }

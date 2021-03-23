@@ -327,7 +327,7 @@ namespace DSharpPlus.SlashCommands
                     Interaction = e.Interaction,
                     Channel = e.Interaction.Channel,
                     Guild = e.Interaction.Guild,
-                    Member = e.Interaction.Member,
+                    User = e.Interaction.User,
                     Client = client,
                     SlashCommandsExtension = this,
                     CommandName = e.Interaction.Data.Name,
@@ -365,11 +365,42 @@ namespace DSharpPlus.SlashCommands
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(bool)))
                                     args.Add((bool)option.Value);
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordUser)))
-                                    args.Add(await Client.GetUserAsync((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
+                                    {
+                                        args.Add(member);
+                                    }
+                                    else if (e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
+                                    {
+                                        args.Add(user);
+                                    }
+                                    else
+                                    {
+                                        args.Add(await Client.GetUserAsync((ulong)option.Value));
+                                    }
+                                }
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordChannel)))
-                                    args.Add(e.Interaction.Guild.GetChannel((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Channels.TryGetValue((ulong)option.Value, out var channel))
+                                    {
+                                        args.Add(channel);
+                                    }
+                                    else
+                                    {
+                                        args.Add(e.Interaction.Guild.GetChannel((ulong)option.Value));
+                                    }
+                                }
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordRole)))
-                                    args.Add(e.Interaction.Guild.GetRole((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Roles.TryGetValue((ulong)option.Value, out var role))
+                                    {
+                                        args.Add(role);
+                                    }
+                                    else
+                                    {
+                                        args.Add(e.Interaction.Guild.GetRole((ulong)option.Value));
+                                    }
+                                }
                                 else
                                     throw new ArgumentException($"How on earth did that happen");
                             }
@@ -402,11 +433,42 @@ namespace DSharpPlus.SlashCommands
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(bool)))
                                     args.Add((bool)option.Value);
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordUser)))
-                                    args.Add(await Client.GetUserAsync((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
+                                    {
+                                        args.Add(member);
+                                    }
+                                    else if (e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
+                                    {
+                                        args.Add(user);
+                                    }
+                                    else
+                                    {
+                                        args.Add(await Client.GetUserAsync((ulong)option.Value));
+                                    }
+                                }
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordChannel)))
-                                    args.Add(e.Interaction.Guild.GetChannel((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Channels.TryGetValue((ulong)option.Value, out var channel))
+                                    {
+                                        args.Add(channel);
+                                    }
+                                    else
+                                    {
+                                        args.Add(e.Interaction.Guild.GetChannel((ulong)option.Value));
+                                    }
+                                }
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordRole)))
-                                    args.Add(e.Interaction.Guild.GetRole((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Roles.TryGetValue((ulong)option.Value, out var role))
+                                    {
+                                        args.Add(role);
+                                    }
+                                    else
+                                    {
+                                        args.Add(e.Interaction.Guild.GetRole((ulong)option.Value));
+                                    }
+                                }
                                 else
                                     throw new ArgumentException($"How on earth did that happen");
                             }
@@ -441,11 +503,42 @@ namespace DSharpPlus.SlashCommands
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(bool)))
                                     args.Add((bool)option.Value);
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordUser)))
-                                    args.Add(await Client.GetUserAsync((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
+                                    {
+                                        args.Add(member);
+                                    }
+                                    else if (e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
+                                    {
+                                        args.Add(user);
+                                    }
+                                    else
+                                    {
+                                        args.Add(await Client.GetUserAsync((ulong)option.Value));
+                                    }
+                                }
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordChannel)))
-                                    args.Add(e.Interaction.Guild.GetChannel((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Channels.TryGetValue((ulong)option.Value, out var channel))
+                                    {
+                                        args.Add(channel);
+                                    }
+                                    else
+                                    {
+                                        args.Add(e.Interaction.Guild.GetChannel((ulong)option.Value));
+                                    }
+                                }
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordRole)))
-                                    args.Add(e.Interaction.Guild.GetRole((ulong)option.Value));
+                                {
+                                    if (e.Interaction.Data.Resolved.Roles.TryGetValue((ulong)option.Value, out var role))
+                                    {
+                                        args.Add(role);
+                                    }
+                                    else
+                                    {
+                                        args.Add(e.Interaction.Guild.GetRole((ulong)option.Value));
+                                    }
+                                }
                                 else
                                     throw new ArgumentException($"How on earth did that happen");
                             }

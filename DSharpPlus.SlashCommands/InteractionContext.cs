@@ -33,9 +33,18 @@ namespace DSharpPlus.SlashCommands
         public DiscordChannel Channel { get; internal set; }
 
         /// <summary>
-        /// Gets the member which executed this interaction
+        /// Gets the user which executed this interaction
         /// </summary>
-        public DiscordMember Member { get; internal set; }
+        public DiscordUser User { get; internal set; }
+
+        /// <summary>
+        /// Gets the member which executed this interaction, or null if the command is in a DM
+        /// </summary>
+        public DiscordMember Member { get
+            {
+                if (User is DiscordMember member) return member;
+                else return null;
+            } }
 
         /// <summary>
         /// Gets the slash command module this interaction was created in
