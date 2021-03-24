@@ -88,7 +88,7 @@ If you've registered the command class for your testing server, once you start t
 You probably want to do a lot more with the command than write a message to the console. Let's make a response to the command instead.
 
 To make a response, you must run `CreateResponseAsync` on your `InteractionContext`. `CreateResponseAsync` takes two arguments. The first is a `DiscordInteractionResponseType`. There are currently 3 types:
-* `Ping` - The docs don't specify where exactly you'll ever get a response of type `Pong`, so it's safe to ignore for now.
+* `Ping` - no idea
 * `DeferredChannelMessageWithSource` - Acknowledges the interaction, doesn't require any content.
 * `ChannelMessageWithSource` - Sends a message to the channel, requires you to specify some data to send.
 
@@ -109,7 +109,7 @@ If your code will take some time to execute:
 [SlashCommand("test", "A slash command made to test the DSharpPlusSlashCommands library!")]
 public async Task TestCommand(InteractionContext ctx)
 {
-  await ctx.CreateResponseAsync(DiscordInteractionResponseType.DeferredChannelMessageWithSource, new DiscordInteractionBuilder());
+  await ctx.CreateResponseAsync(DiscordInteractionResponseType.DeferredChannelMessageWithSource);
   await Task.Delay(5000);
   await ctx.EditResponseAsync(new DiscordInteractionBuilder().WithContent("5 second delay complete!"));
 }
