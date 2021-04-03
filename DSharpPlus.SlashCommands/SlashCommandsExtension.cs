@@ -366,11 +366,11 @@ namespace DSharpPlus.SlashCommands
                                     args.Add((bool)option.Value);
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordUser)))
                                 {
-                                    if (e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
+                                    if (e.Interaction.Data.Resolved.Members != null && e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
                                     {
                                         args.Add(member);
                                     }
-                                    else if (e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
+                                    else if (e.Interaction.Data.Resolved.Users != null && e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
                                     {
                                         args.Add(user);
                                     }
@@ -434,11 +434,11 @@ namespace DSharpPlus.SlashCommands
                                     args.Add((bool)option.Value);
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordUser)))
                                 {
-                                    if (e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
+                                    if (e.Interaction.Data.Resolved.Members != null && e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
                                     {
                                         args.Add(member);
                                     }
-                                    else if (e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
+                                    else if (e.Interaction.Data.Resolved.Users != null && e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
                                     {
                                         args.Add(user);
                                     }
@@ -504,11 +504,11 @@ namespace DSharpPlus.SlashCommands
                                     args.Add((bool)option.Value);
                                 else if (ReferenceEquals(parameter.ParameterType, typeof(DiscordUser)))
                                 {
-                                    if (e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
+                                    if (e.Interaction.Data.Resolved.Members != null && e.Interaction.Data.Resolved.Members.TryGetValue((ulong)option.Value, out var member))
                                     {
                                         args.Add(member);
                                     }
-                                    else if (e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
+                                    else if (e.Interaction.Data.Resolved.Users != null && e.Interaction.Data.Resolved.Users.TryGetValue((ulong)option.Value, out var user))
                                     {
                                         args.Add(user);
                                     }
