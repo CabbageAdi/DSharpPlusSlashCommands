@@ -1,3 +1,4 @@
+# THIS IS ARCHIVED. USE [DSharpPlus.SlashCommands](https://github.com/IDoEverything/DSharpPlus.SlashCommands) INSTEAD.
 # DSharpPlusSlashCommands
 An unofficial slash commands implementation for [DSharpPlus](https://github.com/DSharpPlus/DSharpPlus)
 
